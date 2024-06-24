@@ -1,2 +1,4 @@
 rootProject.name = 'baemin-service'
+include 'api'
+include 'db'
 
