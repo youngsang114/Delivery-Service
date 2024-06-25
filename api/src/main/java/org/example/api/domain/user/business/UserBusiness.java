@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.api.common.annotation.Business;
 import org.example.api.common.error.ErrorCode;
 import org.example.api.common.exception.ApiException;
+import org.example.api.domain.token.business.TokenBusiness;
+import org.example.api.domain.token.controller.model.TokenResponse;
 import org.example.api.domain.user.controller.model.UserLoginRequest;
 import org.example.api.domain.user.controller.model.UserRegisterRequest;
 import org.example.api.domain.user.controller.model.UserResponse;
@@ -20,7 +22,7 @@ public class UserBusiness {
 
     private final UserService userService;
     private final UserConverter userConverter;
-
+    private final TokenBusiness tokenBusiness;
     /**
      * 사용자에 대한 가입 처리 로직
      * 1. request -> entity
@@ -48,14 +50,11 @@ public class UserBusiness {
      * 3. token 생성
      * 4. token response
      */
-    public UserResponse login(UserLoginRequest request) {
+    public TokenResponse login(UserLoginRequest request) {
 
         UserEntity userEntity = userService.login(request.getEmail(), request.getPassword());
-
-        // 사용자가 없으면 throw
-
-        // TODO 토큰 생성
-        return userConverter.toResponse(userEntity);
+        TokenResponse tokenResponse = tokenBusiness.issueToken(userEntity);
+        return tokenResponse;
 
     }
 }

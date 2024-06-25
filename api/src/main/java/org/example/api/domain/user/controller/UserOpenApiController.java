@@ -3,6 +3,7 @@ package org.example.api.domain.user.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.api.common.api.Api;
+import org.example.api.domain.token.controller.model.TokenResponse;
 import org.example.api.domain.user.business.UserBusiness;
 import org.example.api.domain.user.controller.model.UserLoginRequest;
 import org.example.api.domain.user.controller.model.UserRegisterRequest;
@@ -31,11 +32,11 @@ public class UserOpenApiController {
 
     // 로그인 하는 부분
     @PostMapping("/login")
-    public Api<UserResponse> login(
+    public Api<TokenResponse> login(
             @Valid
             @RequestBody Api<UserLoginRequest> request
     ){
-        UserResponse response = userBusiness.login(request.getBody());
+        TokenResponse response = userBusiness.login(request.getBody());
         return Api.OK(response);
     }
 }
