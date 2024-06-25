@@ -50,4 +50,13 @@ public class UserService {
         ).orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND, "email,password로 user을 찾을 수 없습니다"));
     }
 
+    public UserEntity getUserWithThrow(
+            Long userId
+    ){
+        return userRepository.findFirstByIdAndStatusOrderByIdDesc(
+                userId,
+                UserStatus.REGISTERED
+        ).orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND, "userId로 user을 찾을 수 없습니다"));
+    }
+
 }

@@ -10,6 +10,7 @@ import org.example.api.domain.user.controller.model.UserLoginRequest;
 import org.example.api.domain.user.controller.model.UserRegisterRequest;
 import org.example.api.domain.user.controller.model.UserResponse;
 import org.example.api.domain.user.converter.UserConverter;
+import org.example.api.domain.user.model.User;
 import org.example.api.domain.user.service.UserService;
 import org.example.db.user.UserEntity;
 
@@ -56,5 +57,11 @@ public class UserBusiness {
         TokenResponse tokenResponse = tokenBusiness.issueToken(userEntity);
         return tokenResponse;
 
+    }
+
+    public UserResponse me(User user) {
+        UserEntity userEntity = userService.getUserWithThrow(user.getId());
+        UserResponse response = userConverter.toResponse(userEntity);
+        return response;
     }
 }
