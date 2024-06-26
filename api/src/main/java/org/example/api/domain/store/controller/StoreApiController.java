@@ -19,7 +19,7 @@ public class StoreApiController {
 
     @GetMapping("/search")
     public Api<List<StoreResponse>> search(
-            @RequestParam(required = false)
+            @RequestParam(value = "storeCategory",required = false)
             StoreCategory storeCategory
     ){
         List<StoreResponse> storeResponses = storeBusiness.searchCategory(storeCategory);
