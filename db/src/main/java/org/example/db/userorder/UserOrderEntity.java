@@ -9,9 +9,12 @@ import lombok.experimental.SuperBuilder;
 import org.example.db.BaseEntity;
 import org.example.db.user.UserEntity;
 import org.example.db.userorder.enums.UserOrderStatus;
+import org.example.db.userordermenu.UserOrderMenuEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "user_order")
@@ -22,10 +25,12 @@ import java.time.LocalDateTime;
 @SuperBuilder
 public class UserOrderEntity extends BaseEntity {
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity; // user table 1:n
+
+    @OneToMany(mappedBy = "userOrderEntity")
+    private List<UserOrderMenuEntity> userOrderMenuEntities = new ArrayList<>();
 
     @Column(length = 50,nullable = false)
     @Enumerated(EnumType.STRING)

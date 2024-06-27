@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 @Table(name = "store_menu")
 public class StoreMenuEntity extends BaseEntity {
 
-    @Column(nullable = false)
     @ManyToOne
     @JoinColumn(name = "store_id")
     private StoreEntity storeEntity;

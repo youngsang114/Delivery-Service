@@ -25,7 +25,7 @@ public class StoreMenuService {
     }
 
     public List<StoreMenuEntity> getStoreMenuByStoreId(Long storeId){
-        return storeMenuRepository.findAllByStoreIdAndStatusOrderBySequenceDesc(storeId,StoreMenuStatus.REGISTERED);
+        return storeMenuRepository.findAllByStoreEntity_IdAndStatusOrderBySequenceDesc(storeId,StoreMenuStatus.REGISTERED);
     }
 
     // 매뉴 등록
