@@ -9,7 +9,9 @@ import org.example.api.domain.storemenu.controller.model.StoreMenuResponse;
 import org.example.db.store.StoreRepository;
 import org.example.db.storemenu.StoreMenuEntity;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Converter
 @AllArgsConstructor
@@ -49,5 +51,13 @@ public class StoreMenuConverter {
                             ;
                 })
                 .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+    }
+
+    public List<StoreMenuResponse> toResponse(
+            List<StoreMenuEntity> list
+    ){
+        return list.stream()
+                .map(it -> toResponse(it))
+                .collect(Collectors.toList());
     }
 }

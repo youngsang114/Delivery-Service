@@ -18,6 +18,14 @@ public class UserOrderService {
 
     private final UserOrderRepository userOrderRepository;
 
+    public UserOrderEntity getUserOrderWithOutStatusWithThrow(
+            Long id,
+            Long userId
+    ){
+        return userOrderRepository.findAllByIdAndUserEntity_Id(id, userId)
+                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+    }
+
     /**
      * 주문 id, 주문 등록 상태,유저 id를 입력받아서 -> UserOrderEntity를 반환하는 메서드
      */
