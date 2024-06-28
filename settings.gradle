@@ -1,4 +1,5 @@
 rootProject.name = 'baemin-service'
 include 'api'
 include 'db'
+include 'store-admin'
 
