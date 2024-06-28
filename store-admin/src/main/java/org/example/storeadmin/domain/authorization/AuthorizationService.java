@@ -34,6 +34,7 @@ public class AuthorizationService implements UserDetailsService {
                     UserSession userSession = UserSession.builder()
                             .userId(it.getId())
                             .email(it.getEmail())
+                            .password(it.getPassword())
                             .status(it.getStatus())
                             .role(it.getRole())
                             .registeredAt(it.getRegisteredAt())
