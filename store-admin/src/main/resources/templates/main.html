@@ -2,11 +2,16 @@
 <html lang="kor" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main Page</title>
 </head>
 <body>
-    <H1>MAIN PAGE</H1>
-
-    <h1 th:text="${#authentication.name}"></h1> </br>
+<h1>MAIN PAGE</h1>
+<div th:with="isLogin = ${authentication != null}">
+    <h1 th:if="${isLogin}" th:text="${authentication.name}">Username</h1> </br>
+    <h1 th:if="${isLogin}" th:text="${authentication.principal.storeName}">Store Name</h1> </br>
+    <h1 th:if="${isLogin}" th:text="${authentication.principal.role}">Role</h1> </br>
+    <h1 th:if="${isLogin}" th:text="${authentication}">Authentication Details</h1>
+    <h1 th:if="${!isLogin}">Not authenticated</h1>
+</div>
 </body>
 </html>
