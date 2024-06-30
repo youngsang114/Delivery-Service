@@ -11,6 +11,7 @@ import org.example.api.domain.userorder.controller.model.UserOrderDetailResponse
 import org.example.api.domain.userorder.controller.model.UserOrderRequest;
 import org.example.api.domain.userorder.controller.model.UserOrderResponse;
 import org.example.api.domain.userorder.converter.UserOrderConverter;
+import org.example.api.domain.userorder.producer.UserOrderProducer;
 import org.example.api.domain.userorder.service.UserOrderService;
 import org.example.api.domain.userordermenu.converter.UserOrderMenuConverter;
 import org.example.api.domain.userordermenu.service.UserOrderMenuService;
@@ -34,6 +35,7 @@ public class UserOrderBusiness {
     private final UserOrderMenuService userOrderMenuService;
     private final StoreService storeService;
     private final StoreConverter storeConverter;
+    private final UserOrderProducer userOrderProducer;
 
     // 1. 사용자, 매뉴 id
     // 2. userOrder 생성
@@ -64,6 +66,9 @@ public class UserOrderBusiness {
         userOrderMenuEntityList.forEach(it ->{
             userOrderMenuService.order(it);
         });
+
+        // 비동기로 가맹점에 주문 알리기
+        userOrderProducer.sendOrder(newUserOrderEntity);
 
         // response 응답!
         return userOrderConverter.toResponse(newUserOrderEntity);
