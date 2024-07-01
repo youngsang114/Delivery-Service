@@ -6,12 +6,28 @@
 </head>
 <body>
 <h1>MAIN PAGE</h1>
-<div th:with="isLogin = ${authentication != null}">
+
+
+<!--<div th:with="isLogin = ${authentication != null}">
     <h1 th:if="${isLogin}" th:text="${authentication.name}">Username</h1> </br>
     <h1 th:if="${isLogin}" th:text="${authentication.principal.storeName}">Store Name</h1> </br>
     <h1 th:if="${isLogin}" th:text="${authentication.principal.role}">Role</h1> </br>
     <h1 th:if="${isLogin}" th:text="${authentication}">Authentication Details</h1>
     <h1 th:if="${!isLogin}">Not authenticated</h1>
-</div>
+</div>-->
 </body>
+<script>
+    const url = "http://localhost:8081/api/sse/connect"
+    const eventSource = new EventSource(url);  // sse 연결
+
+    eventSource.onopen = event => {
+        console.log("sse connection ");
+        console.log(event);
+    }
+
+    eventSource.onmessage = event =>{
+        console.log("receive data : "+event.data);
+    }
+
+</script>
 </html>
